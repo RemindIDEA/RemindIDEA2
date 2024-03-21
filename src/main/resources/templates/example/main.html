@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+    <th:block th:fragment="content">
+        <h1>Login 완료해서 가는 페이지</h1>
+
+        <form th:action="@{/example/remove}" th:method="delete">
+            <input type="hidden" name="id" th:value="${loginDTO.id}">
+        </form>
+        <button type="button" id="modify" class="btn btn-primary">회원수정</button>
+        <button type="submit" id="remove" class="btn btn-primary">회원삭제</button>
+
+        <script>
+            $("#remove").click(function(){
+                $("form").submit();
+            });
+
+            $("#modify").click(function() {
+
+            if(!confirm("수정하시겠습니까?")){
+                return ;
+            }
+                $("form")
+                .attr("action", "/example/modify")
+                .attr("method","get")
+                .submit();
+            });
+
+        </script>
+
+
+    </th:block>
+</th:block>
+
+</html>
